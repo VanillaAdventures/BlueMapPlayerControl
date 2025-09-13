@@ -1,6 +1,3 @@
-# BlueMapPlayerControl Configuration
-# Configuration file for BlueMapPlayerControl plugin
-
 # Command settings
 command:
   # Main command name (default: bmpc)
@@ -9,13 +6,14 @@ command:
   # Command aliases
   aliases:
     - "map"
-    - "bmp"
     - "mapcontrol"
+    - "bluemapplayercontrol"
+    - "bmplayercontrol"
 
 # Language settings
 language:
   # Language file to use (without .yml extension)
-  # Available: en, ru, de, fr, es, etc.
+  # Available: en, ru
   file: "en"
   
   # Enable MiniMessage format support
@@ -27,4 +25,3 @@ language:
 settings:
   # Enable debug mode (shows additional logging)
   debug: false
-

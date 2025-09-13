@@ -32,11 +32,3 @@ errors:
   bluemap_not_loaded: "<red>❌</red> <gray>BlueMap is not loaded or not available</gray>"
   invalid_usage: "<red>❌</red> <gray>Invalid usage. Use <green>/{command} help</green> for help</gray>"
   cannot_target_self: "<red>❌</red> <gray>You cannot target yourself with this command</gray>"
-
-# Info messages
-info:
-  current_status: "<gray>Your current visibility status: {status}</gray>"
-  player_status: "<gray>{player}'s visibility status: {status}</gray>"
-  status_visible: "<green>Visible</green>"
-  status_invisible: "<red>Invisible</red>"
-

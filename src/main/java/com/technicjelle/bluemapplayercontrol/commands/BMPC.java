@@ -58,6 +58,10 @@ public class BMPC implements CommandExecutor, TabCompleter {
 			
 			configManager.debugLog("Reloading configuration...");
 			configManager.reload();
+			
+			// Re-register command with new aliases
+			plugin.registerCommand();
+			
 			sendMessage(sender, "status.config_reloaded");
 			return true;
 		}

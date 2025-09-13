@@ -40,7 +40,7 @@ public final class BlueMapPlayerControl extends JavaPlugin {
 		getLogger().info("[BlueMapPlayerControl] Plugin disabled");
 	}
 	
-	private void registerCommand() {
+	public void registerCommand() {
 		String commandName = configManager.getCommandName();
 		PluginCommand command = getCommand(commandName);
 		
@@ -55,6 +55,9 @@ public final class BlueMapPlayerControl extends JavaPlugin {
 		// Set executor and tab completer
 		command.setExecutor(executor);
 		command.setTabCompleter(executor);
+		
+		// Set aliases from config
+		command.setAliases(configManager.getCommandAliases());
 		
 		// Log command registration
 		String aliases = String.join(", ", configManager.getCommandAliases());

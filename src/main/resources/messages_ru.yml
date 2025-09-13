@@ -32,11 +32,3 @@ errors:
   bluemap_not_loaded: "<red>❌</red> <gray>BlueMap не загружен или недоступен</gray>"
   invalid_usage: "<red>❌</red> <gray>Неверное использование. Используйте <green>/{command} help</green> для помощи</gray>"
   cannot_target_self: "<red>❌</red> <gray>Вы не можете использовать эту команду на себе</gray>"
-
-# Информационные сообщения
-info:
-  current_status: "<gray>Ваш текущий статус видимости: {status}</gray>"
-  player_status: "<gray>Статус видимости {player}: {status}</gray>"
-  status_visible: "<green>Видим</green>"
-  status_invisible: "<red>Невидим</red>"
-

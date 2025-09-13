@@ -2,8 +2,6 @@ package com.technicjelle.bluemapplayercontrol;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -123,18 +121,6 @@ public class ConfigManager {
         
         if (minimessageEnabled) {
             // Use real MiniMessage
-            return miniMessage.deserialize(message);
-        } else {
-            // Use legacy color codes
-            return legacySerializer.deserialize(message);
-        }
-    }
-    
-    public Component getMessageComponent(String path, Placeholder... placeholders) {
-        String message = getMessage(path);
-        
-        if (minimessageEnabled) {
-            // Use real MiniMessage - placeholders will be handled by string replacement
             return miniMessage.deserialize(message);
         } else {
             // Use legacy color codes
