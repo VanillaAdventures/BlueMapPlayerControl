@@ -11,37 +11,47 @@ website: https://github.com/TechnicJelle/BlueMapPlayerControl
 
 commands:
   bmpc:
-    usage: /<command> [hide | show] [player]
-    description: Toggles visibility on BlueMap
+    usage: /<command> [help | toggle | show | hide] [player]
+    description: Control player visibility on BlueMap
     permission: bmpc
+    aliases: [bluemap, bmp, mapcontrol]
 
 permissions:
   bmpc:
     default: true
-  bmpc.*:
-    default: op
+    description: "Access to BlueMapPlayerControl commands"
+  bmpc.help:
+    default: true
+    description: "Access to help command"
+  bmpc.self:
+    default: true
+    description: "Access to self visibility commands"
     children:
-      bmpc.self:
-        default: true
-        children:
-          bmpc.self.toggle: true
-          bmpc.self.show: true
-          bmpc.self.hide: true
-      bmpc.others:
-        default: op
-        children:
-          bmpc.others.toggle: true
-          bmpc.others.show: true
-          bmpc.others.hide: true
+      bmpc.self.toggle: true
+      bmpc.self.show: true
+      bmpc.self.hide: true
+  bmpc.others:
+    default: op
+    description: "Access to other players visibility commands"
+    children:
+      bmpc.others.toggle: true
+      bmpc.others.show: true
+      bmpc.others.hide: true
   bmpc.self.toggle:
     default: true
+    description: "Toggle own visibility"
   bmpc.self.show:
     default: true
+    description: "Show yourself on map"
   bmpc.self.hide:
     default: true
+    description: "Hide yourself from map"
   bmpc.others.toggle:
     default: op
+    description: "Toggle other players visibility"
   bmpc.others.show:
     default: op
+    description: "Show other players on map"
   bmpc.others.hide:
     default: op
+    description: "Hide other players from map"

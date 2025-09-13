@@ -11,30 +11,61 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class BlueMapPlayerControl extends JavaPlugin {
 	UpdateChecker updateChecker;
 	BMPC executor;
+	ConfigManager configManager;
 
 	@Override
 	public void onEnable() {
-		getLogger().info("BlueMapPlayerControl enabled");
+		// Initialize configuration manager
+		configManager = new ConfigManager(this);
+		
+		// Log enabled message
+		getLogger().info("[BlueMapPlayerControl] Plugin enabled successfully");
 
+		// Initialize metrics
 		new Metrics(this, 18378);
 
+		// Initialize update checker
 		updateChecker = new UpdateChecker("TechnicJelle", "BlueMapPlayerControl", getDescription().getVersion());
 		updateChecker.checkAsync();
 
+		// Register BlueMap callback
 		BlueMapAPI.onEnable(api -> updateChecker.logUpdateMessage(getLogger()));
 
-		PluginCommand bmpc = Bukkit.getPluginCommand("bmpc");
-		executor = new BMPC();
-		if(bmpc != null) {
-			bmpc.setExecutor(executor);
-			bmpc.setTabCompleter(executor);
-		} else {
-			getLogger().warning("bmpc is null. This is not good");
-		}
+		// Register command
+		registerCommand();
 	}
 
 	@Override
 	public void onDisable() {
-		getLogger().info("BlueMapPlayerControl disabled");
+		getLogger().info("[BlueMapPlayerControl] Plugin disabled");
+	}
+	
+	private void registerCommand() {
+		String commandName = configManager.getCommandName();
+		PluginCommand command = getCommand(commandName);
+		
+		if (command == null) {
+			getLogger().warning("Command '" + commandName + "' not found in plugin.yml");
+			return;
+		}
+		
+		// Create executor
+		executor = new BMPC(this, configManager);
+		
+		// Set executor and tab completer
+		command.setExecutor(executor);
+		command.setTabCompleter(executor);
+		
+		// Log command registration
+		String aliases = String.join(", ", configManager.getCommandAliases());
+		getLogger().info("[BlueMapPlayerControl] Command '" + commandName + "' registered with aliases: " + aliases);
+	}
+	
+	/**
+	 * Get the configuration manager
+	 * @return ConfigManager instance
+	 */
+	public ConfigManager getConfigManager() {
+		return configManager;
 	}
 }

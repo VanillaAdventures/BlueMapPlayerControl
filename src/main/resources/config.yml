@@ -1,0 +1,32 @@
+# BlueMapPlayerControl Configuration
+# Configuration file for BlueMapPlayerControl plugin
+
+# Command settings
+command:
+  # Main command name (default: bmpc)
+  name: "bmpc"
+  
+  # Command aliases
+  aliases:
+    - "bluemap"
+    - "bmp"
+    - "mapcontrol"
+
+# Language settings
+language:
+  # Language file to use (without .yml extension)
+  # Available: en, ru, de, fr, es, etc.
+  file: "en"
+  
+  # Enable MiniMessage format support
+  # MiniMessage allows for rich text formatting
+  # Documentation: https://docs.adventure.kyori.net/minimessage/
+  minimessage: true
+
+# Plugin settings
+settings:
+  # Enable debug mode (shows additional logging)
+  debug: false
+  
+  # Auto-save configuration changes
+  auto-save: true

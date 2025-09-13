@@ -1,0 +1,40 @@
+# BlueMapPlayerControl English Messages
+# This file contains all messages for the plugin
+# MiniMessage format is supported for rich text formatting
+
+# Help messages
+help:
+  header: "<gradient:#00ff00:#0080ff>BlueMapPlayerControl</gradient> <gray>v{version}</gray>"
+  description: "<gray>Control player visibility on BlueMap</gray>"
+  commands:
+    toggle: "<click:run_command:'/{command} toggle'><hover:show_text:'Click to toggle your visibility'><green>/{command} toggle</green></hover></click> <gray>- Toggle your visibility on the map</gray>"
+    show: "<click:run_command:'/{command} show'><hover:show_text:'Click to show yourself'><green>/{command} show</green></hover></click> <gray>- Make yourself visible on the map</gray>"
+    hide: "<click:run_command:'/{command} hide'><hover:show_text:'Click to hide yourself'><green>/{command} hide</green></hover></click> <gray>- Hide yourself from the map</gray>"
+    show_other: "<click:run_command:'/{command} show <player>'><hover:show_text:'Click to show a player'><green>/{command} show <player></green></hover></click> <gray>- Make a player visible on the map</gray>"
+    hide_other: "<click:run_command:'/{command} hide <player>'><hover:show_text:'Click to hide a player'><green>/{command} hide <player></green></hover></click> <gray>- Hide a player from the map</gray>"
+    toggle_other: "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Click to toggle player visibility'><green>/{command} toggle <player></green></hover></click> <gray>- Toggle a player's visibility on the map</gray>"
+  footer: "<gray>Use <green>/{command} help</green> to see this help message</gray>"
+
+# Status messages
+status:
+  visible: "<green>✓</green> <gray>You are now <green>visible</green> on the map</gray>"
+  invisible: "<red>✗</red> <gray>You are now <red>invisible</red> on the map</gray>"
+  other_visible: "<green>✓</green> <gray>{player} is now <green>visible</green> on the map</gray>"
+  other_invisible: "<red>✗</red> <gray>{player} is now <red>invisible</red> on the map</gray>"
+
+# Error messages
+errors:
+  player_only: "<red>❌</red> <gray>This command can only be used by players</gray>"
+  no_permission: "<red>❌</red> <gray>You don't have permission to use this command</gray>"
+  player_not_found: "<red>❌</red> <gray>Player <yellow>{player}</yellow> not found</gray>"
+  bluemap_not_loaded: "<red>❌</red> <gray>BlueMap is not loaded or not available</gray>"
+  invalid_usage: "<red>❌</red> <gray>Invalid usage. Use <green>/{command} help</green> for help</gray>"
+  cannot_target_self: "<red>❌</red> <gray>You cannot target yourself with this command</gray>"
+
+# Info messages
+info:
+  current_status: "<gray>Your current visibility status: {status}</gray>"
+  player_status: "<gray>{player}'s visibility status: {status}</gray>"
+  status_visible: "<green>Visible</green>"
+  status_invisible: "<red>Invisible</red>"
+

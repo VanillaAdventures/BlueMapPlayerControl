@@ -1,0 +1,40 @@
+# BlueMapPlayerControl Русские Сообщения
+# Этот файл содержит все сообщения для плагина
+# Поддерживается формат MiniMessage для богатого текстового форматирования
+
+# Сообщения помощи
+help:
+  header: "<gradient:#00ff00:#0080ff>BlueMapPlayerControl</gradient> <gray>v{version}</gray>"
+  description: "<gray>Управление видимостью игроков на BlueMap</gray>"
+  commands:
+    toggle: "<click:run_command:'/{command} toggle'><hover:show_text:'Нажмите чтобы переключить видимость'><green>/{command} toggle</green></hover></click> <gray>- Переключить вашу видимость на карте</gray>"
+    show: "<click:run_command:'/{command} show'><hover:show_text:'Нажмите чтобы показать себя'><green>/{command} show</green></hover></click> <gray>- Сделать себя видимым на карте</gray>"
+    hide: "<click:run_command:'/{command} hide'><hover:show_text:'Нажмите чтобы скрыть себя'><green>/{command} hide</green></hover></click> <gray>- Скрыть себя с карты</gray>"
+    show_other: "<click:run_command:'/{command} show <player>'><hover:show_text:'Нажмите чтобы показать игрока'><green>/{command} show <player></green></hover></click> <gray>- Сделать игрока видимым на карте</gray>"
+    hide_other: "<click:run_command:'/{command} hide <player>'><hover:show_text:'Нажмите чтобы скрыть игрока'><green>/{command} hide <player></green></hover></click> <gray>- Скрыть игрока с карты</gray>"
+    toggle_other: "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Нажмите чтобы переключить видимость игрока'><green>/{command} toggle <player></green></hover></click> <gray>- Переключить видимость игрока на карте</gray>"
+  footer: "<gray>Используйте <green>/{command} help</green> чтобы увидеть это сообщение помощи</gray>"
+
+# Сообщения статуса
+status:
+  visible: "<green>✓</green> <gray>Теперь вы <green>видимы</green> на карте</gray>"
+  invisible: "<red>✗</red> <gray>Теперь вы <red>невидимы</red> на карте</gray>"
+  other_visible: "<green>✓</green> <gray>{player} теперь <green>видим</green> на карте</gray>"
+  other_invisible: "<red>✗</red> <gray>{player} теперь <red>невидим</red> на карте</gray>"
+
+# Сообщения об ошибках
+errors:
+  player_only: "<red>❌</red> <gray>Эта команда может использоваться только игроками</gray>"
+  no_permission: "<red>❌</red> <gray>У вас нет прав для использования этой команды</gray>"
+  player_not_found: "<red>❌</red> <gray>Игрок <yellow>{player}</yellow> не найден</gray>"
+  bluemap_not_loaded: "<red>❌</red> <gray>BlueMap не загружен или недоступен</gray>"
+  invalid_usage: "<red>❌</red> <gray>Неверное использование. Используйте <green>/{command} help</green> для помощи</gray>"
+  cannot_target_self: "<red>❌</red> <gray>Вы не можете использовать эту команду на себе</gray>"
+
+# Информационные сообщения
+info:
+  current_status: "<gray>Ваш текущий статус видимости: {status}</gray>"
+  player_status: "<gray>Статус видимости {player}: {status}</gray>"
+  status_visible: "<green>Видим</green>"
+  status_invisible: "<red>Невидим</red>"
+
