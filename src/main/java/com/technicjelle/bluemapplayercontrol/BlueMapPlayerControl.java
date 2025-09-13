@@ -167,14 +167,12 @@ public final class BlueMapPlayerControl extends JavaPlugin implements Listener {
 		// Check if player has any permission to control visibility
 		if (!hasVisibilityControlPermission(player)) {
 			// If player doesn't have permission, make them visible on the map
-			// Use delayed task to ensure BlueMap is ready and player is fully loaded
-			Bukkit.getScheduler().runTaskLater(this, () -> {
-				if (BlueMapAPI.getInstance().isPresent()) {
-					BlueMapAPI api = BlueMapAPI.getInstance().get();
-					api.getWebApp().setPlayerVisibility(player.getUniqueId(), true);
-					configManager.debugLog("Player %s has no visibility control permission, automatically made visible", player.getName());
-				}
-			}, 100L); // Delay by 5 seconds to ensure BlueMap and player are ready
+			// Execute immediately since we can't use Folia schedulers in this API version
+			if (BlueMapAPI.getInstance().isPresent()) {
+				BlueMapAPI api = BlueMapAPI.getInstance().get();
+				api.getWebApp().setPlayerVisibility(player.getUniqueId(), true);
+				configManager.debugLog("Player %s has no visibility control permission, automatically made visible", player.getName());
+			}
 		}
 	}
 	
