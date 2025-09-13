@@ -9,12 +9,6 @@ author: TechnicJelle
 description: Adds player hiding functionality to BlueMap
 website: https://github.com/TechnicJelle/BlueMapPlayerControl
 
-commands:
-  bmpc:
-    usage: /<command> [help | toggle | show | hide] [player]
-    description: Control player visibility on BlueMap
-    permission: bmpc
-
 permissions:
   bmpc:
     default: true
@@ -36,21 +30,6 @@ permissions:
       bmpc.others.toggle: true
       bmpc.others.show: true
       bmpc.others.hide: true
-  bmpc.self.toggle:
-    default: true
-    description: "Toggle own visibility"
-  bmpc.self.show:
-    default: true
-    description: "Show yourself on map"
-  bmpc.self.hide:
-    default: true
-    description: "Hide yourself from map"
-  bmpc.others.toggle:
+  bmpc.reload:
     default: op
-    description: "Toggle other players visibility"
-  bmpc.others.show:
-    default: op
-    description: "Show other players on map"
-  bmpc.others.hide:
-    default: op
-    description: "Hide other players from map"
+    description: "Reload plugin configuration"

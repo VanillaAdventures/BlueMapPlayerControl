@@ -68,8 +68,8 @@ public class BMPC implements CommandExecutor, TabCompleter {
 		
 		String subCommand = args[0].toLowerCase();
 		
-		// Handle self commands (only for players)
-		if (sender instanceof Player player) {
+		// Handle self commands (only for players, only when no second argument)
+		if (sender instanceof Player player && args.length == 1) {
 			UUID senderUUID = player.getUniqueId();
 			
 			switch (subCommand) {
@@ -97,15 +97,9 @@ public class BMPC implements CommandExecutor, TabCompleter {
 					hideSelf(api, sender, senderUUID);
 					return true;
 			}
-		} else {
-			// Console can't use self commands
-			if (args.length == 1) {
-				sendMessage(sender, "errors.player_only");
-				return true;
-			}
 		}
 		
-		// Handle other player commands
+		// Handle other player commands (requires second argument)
 		if (args.length < 2) {
 			configManager.debugLog("Not enough arguments for other player command");
 			sendMessage(sender, "errors.invalid_usage");
