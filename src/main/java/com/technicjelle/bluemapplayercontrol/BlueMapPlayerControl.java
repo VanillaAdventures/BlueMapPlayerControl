@@ -12,7 +12,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
@@ -161,19 +161,20 @@ public final class BlueMapPlayerControl extends JavaPlugin implements Listener {
 	}
 	
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
+	public void onPlayerLogin(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
 		
 		// Check if player has any permission to control visibility
 		if (!hasVisibilityControlPermission(player)) {
 			// If player doesn't have permission, make them visible on the map
+			// Use delayed task to ensure BlueMap is ready and player is fully loaded
 			Bukkit.getScheduler().runTaskLater(this, () -> {
 				if (BlueMapAPI.getInstance().isPresent()) {
 					BlueMapAPI api = BlueMapAPI.getInstance().get();
 					api.getWebApp().setPlayerVisibility(player.getUniqueId(), true);
 					configManager.debugLog("Player %s has no visibility control permission, automatically made visible", player.getName());
 				}
-			}, 20L); // Delay by 1 second to ensure BlueMap is ready
+			}, 100L); // Delay by 5 seconds to ensure BlueMap and player are ready
 		}
 	}
 	
