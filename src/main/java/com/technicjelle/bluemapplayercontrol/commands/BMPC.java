@@ -3,6 +3,8 @@ package com.technicjelle.bluemapplayercontrol.commands;
 import com.technicjelle.bluemapplayercontrol.BlueMapPlayerControl;
 import com.technicjelle.bluemapplayercontrol.ConfigManager;
 import de.bluecolored.bluemap.api.BlueMapAPI;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -279,17 +281,14 @@ public class BMPC implements CommandExecutor, TabCompleter {
 		String commandName = configManager.getCommandName();
 		String version = plugin.getDescription().getVersion();
 		
-		// Get help messages list from config
-		List<String> helpMessages = configManager.getMessageList("help", 
+		// Get help messages list from config as components
+		List<Component> helpMessages = configManager.getMessageComponentList("help", 
 			"command", commandName, "version", version);
 		
-		// Send all help messages
-		for (String message : helpMessages) {
-			if (message.isEmpty()) {
-				sender.sendMessage("");
-			} else {
-				sender.sendMessage(message);
-			}
+		// Send all help messages using Audience API
+		Audience audience = (Audience) sender;
+		for (Component message : helpMessages) {
+			audience.sendMessage(message);
 		}
 	}
 }
