@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -132,6 +133,40 @@ public class ConfigManager {
     public String getMessageFormatted(String path, String... placeholders) {
         Component component = getMessageComponent(path, placeholders);
         return legacySerializer.serialize(component);
+    }
+    
+    public List<String> getMessageList(String path, String... placeholders) {
+        List<String> messageList = messages.getStringList(path);
+        List<String> result = new ArrayList<>();
+        
+        for (String message : messageList) {
+            // Replace placeholders in format {key}
+            for (int i = 0; i < placeholders.length; i += 2) {
+                if (i + 1 < placeholders.length) {
+                    message = message.replace("{" + placeholders[i] + "}", placeholders[i + 1]);
+                }
+            }
+            result.add(message);
+        }
+        
+        return result;
+    }
+    
+    public List<Component> getMessageComponentList(String path, String... placeholders) {
+        List<String> messages = getMessageList(path, placeholders);
+        List<Component> result = new ArrayList<>();
+        
+        for (String message : messages) {
+            if (minimessageEnabled) {
+                // Use real MiniMessage
+                result.add(miniMessage.deserialize(message));
+            } else {
+                // Use legacy color codes
+                result.add(legacySerializer.deserialize(message));
+            }
+        }
+        
+        return result;
     }
     
     public boolean isDebugEnabled() {

@@ -279,75 +279,17 @@ public class BMPC implements CommandExecutor, TabCompleter {
 		String commandName = configManager.getCommandName();
 		String version = plugin.getDescription().getVersion();
 		
-		// Send header
-		String header = configManager.getMessageFormatted("help.header", 
-			"version", version);
-		sender.sendMessage(header);
+		// Get help messages list from config
+		List<String> helpMessages = configManager.getMessageList("help", 
+			"command", commandName, "version", version);
 		
-		// Send description
-		String description = configManager.getMessageFormatted("help.description");
-		sender.sendMessage(description);
-		
-		// Send commands
-		sender.sendMessage("");
-		
-		// Self commands (only for players)
-		if (sender instanceof Player) {
-			if (sender.hasPermission("bmpc.self.toggle")) {
-				String toggleCmd = configManager.getMessageFormatted("help.commands.toggle",
-					"command", commandName);
-				sender.sendMessage(toggleCmd);
-			}
-			
-			if (sender.hasPermission("bmpc.self.show")) {
-				String showCmd = configManager.getMessageFormatted("help.commands.show",
-					"command", commandName);
-				sender.sendMessage(showCmd);
-			}
-			
-			if (sender.hasPermission("bmpc.self.hide")) {
-				String hideCmd = configManager.getMessageFormatted("help.commands.hide",
-					"command", commandName);
-				sender.sendMessage(hideCmd);
+		// Send all help messages
+		for (String message : helpMessages) {
+			if (message.isEmpty()) {
+				sender.sendMessage("");
+			} else {
+				sender.sendMessage(message);
 			}
 		}
-		
-		// Other player commands
-		if (sender.hasPermission("bmpc.others")) {
-			sender.sendMessage("");
-			
-			if (sender.hasPermission("bmpc.others.toggle")) {
-				String toggleOtherCmd = configManager.getMessageFormatted("help.commands.toggle_other",
-					"command", commandName);
-				sender.sendMessage(toggleOtherCmd);
-			}
-			
-			if (sender.hasPermission("bmpc.others.show")) {
-				String showOtherCmd = configManager.getMessageFormatted("help.commands.show_other",
-					"command", commandName);
-				sender.sendMessage(showOtherCmd);
-			}
-			
-			if (sender.hasPermission("bmpc.others.hide")) {
-				String hideOtherCmd = configManager.getMessageFormatted("help.commands.hide_other",
-					"command", commandName);
-				sender.sendMessage(hideOtherCmd);
-			}
-		}
-		
-		// Admin commands
-		if (sender.hasPermission("bmpc.reload")) {
-			sender.sendMessage("");
-			
-			String reloadCmd = configManager.getMessageFormatted("help.commands.reload",
-				"command", commandName);
-			sender.sendMessage(reloadCmd);
-		}
-		
-		// Send footer
-		sender.sendMessage("");
-		String footer = configManager.getMessageFormatted("help.footer",
-			"command", commandName);
-		sender.sendMessage(footer);
 	}
 }

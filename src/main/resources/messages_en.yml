@@ -4,17 +4,20 @@
 
 # Help messages
 help:
-  header: "<gradient:#00ff00:#0080ff>BlueMapPlayerControl</gradient> <gray>v{version}</gray>"
-  description: "<gray>Control player visibility on BlueMap</gray>"
-  commands:
-    toggle: "<click:run_command:'/{command} toggle'><hover:show_text:'Click to toggle your visibility'><green>/{command} toggle</green></hover></click> <gray>- Toggle your visibility on the map</gray>"
-    show: "<click:run_command:'/{command} show'><hover:show_text:'Click to show yourself'><green>/{command} show</green></hover></click> <gray>- Make yourself visible on the map</gray>"
-    hide: "<click:run_command:'/{command} hide'><hover:show_text:'Click to hide yourself'><green>/{command} hide</green></hover></click> <gray>- Hide yourself from the map</gray>"
-    show_other: "<click:run_command:'/{command} show <player>'><hover:show_text:'Click to show a player'><green>/{command} show <player></green></hover></click> <gray>- Make a player visible on the map</gray>"
-    hide_other: "<click:run_command:'/{command} hide <player>'><hover:show_text:'Click to hide a player'><green>/{command} hide <player></green></hover></click> <gray>- Hide a player from the map</gray>"
-    toggle_other: "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Click to toggle player visibility'><green>/{command} toggle <player></green></hover></click> <gray>- Toggle a player's visibility on the map</gray>"
-    reload: "<click:run_command:'/{command} reload'><hover:show_text:'Click to reload configuration'><green>/{command} reload</green></hover></click> <gray>- Reload plugin configuration</gray>"
-  footer: "<gray>Use <green>/{command} help</green> to see this help message</gray>"
+  - "<gradient:#00ff00:#0080ff>BlueMapPlayerControl</gradient> <gray>v{version}</gray>"
+  - "<gray>Control player visibility on BlueMap</gray>"
+  - ""
+  - "<click:run_command:'/{command} toggle'><hover:show_text:'Click to toggle your visibility'><green>/{command} toggle</green></hover></click> <gray>- Toggle your visibility on the map</gray>"
+  - "<click:run_command:'/{command} show'><hover:show_text:'Click to show yourself'><green>/{command} show</green></hover></click> <gray>- Make yourself visible on the map</gray>"
+  - "<click:run_command:'/{command} hide'><hover:show_text:'Click to hide yourself'><green>/{command} hide</green></hover></click> <gray>- Hide yourself from the map</gray>"
+  - ""
+  - "<click:run_command:'/{command} show <player>'><hover:show_text:'Click to show a player'><green>/{command} show <player></green></hover></click> <gray>- Make a player visible on the map</gray>"
+  - "<click:run_command:'/{command} hide <player>'><hover:show_text:'Click to hide a player'><green>/{command} hide <player></green></hover></click> <gray>- Hide a player from the map</gray>"
+  - "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Click to toggle player visibility'><green>/{command} toggle <player></green></hover></click> <gray>- Toggle a player's visibility on the map</gray>"
+  - ""
+  - "<click:run_command:'/{command} reload'><hover:show_text:'Click to reload configuration'><green>/{command} reload</green></hover></click> <gray>- Reload plugin configuration</gray>"
+  - ""
+  - "<gray>Use <green>/{command} help</green> to see this help message</gray>"
 
 # Status messages
 status:

@@ -4,17 +4,20 @@
 
 # Сообщения помощи
 help:
-  header: "<gradient:#00ff00:#0080ff>BlueMapPlayerControl</gradient> <gray>v{version}</gray>"
-  description: "<gray>Управление видимостью игроков на BlueMap</gray>"
-  commands:
-    toggle: "<click:run_command:'/{command} toggle'><hover:show_text:'Нажмите чтобы переключить видимость'><green>/{command} toggle</green></hover></click> <gray>- Переключить вашу видимость на карте</gray>"
-    show: "<click:run_command:'/{command} show'><hover:show_text:'Нажмите чтобы показать себя'><green>/{command} show</green></hover></click> <gray>- Сделать себя видимым на карте</gray>"
-    hide: "<click:run_command:'/{command} hide'><hover:show_text:'Нажмите чтобы скрыть себя'><green>/{command} hide</green></hover></click> <gray>- Скрыть себя с карты</gray>"
-    show_other: "<click:run_command:'/{command} show <player>'><hover:show_text:'Нажмите чтобы показать игрока'><green>/{command} show <player></green></hover></click> <gray>- Сделать игрока видимым на карте</gray>"
-    hide_other: "<click:run_command:'/{command} hide <player>'><hover:show_text:'Нажмите чтобы скрыть игрока'><green>/{command} hide <player></green></hover></click> <gray>- Скрыть игрока с карты</gray>"
-    toggle_other: "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Нажмите чтобы переключить видимость игрока'><green>/{command} toggle <player></green></hover></click> <gray>- Переключить видимость игрока на карте</gray>"
-    reload: "<click:run_command:'/{command} reload'><hover:show_text:'Нажмите чтобы перезагрузить конфигурацию'><green>/{command} reload</green></hover></click> <gray>- Перезагрузить конфигурацию плагина</gray>"
-  footer: "<gray>Используйте <green>/{command} help</green> чтобы увидеть это сообщение помощи</gray>"
+  - "<gradient:#00ff00:#0080ff>BlueMapPlayerControl</gradient> <gray>v{version}</gray>"
+  - "<gray>Управление видимостью игроков на BlueMap</gray>"
+  - ""
+  - "<click:run_command:'/{command} toggle'><hover:show_text:'Нажмите чтобы переключить видимость'><green>/{command} toggle</green></hover></click> <gray>- Переключить вашу видимость на карте</gray>"
+  - "<click:run_command:'/{command} show'><hover:show_text:'Нажмите чтобы показать себя'><green>/{command} show</green></hover></click> <gray>- Сделать себя видимым на карте</gray>"
+  - "<click:run_command:'/{command} hide'><hover:show_text:'Нажмите чтобы скрыть себя'><green>/{command} hide</green></hover></click> <gray>- Скрыть себя с карты</gray>"
+  - ""
+  - "<click:run_command:'/{command} show <player>'><hover:show_text:'Нажмите чтобы показать игрока'><green>/{command} show <player></green></hover></click> <gray>- Сделать игрока видимым на карте</gray>"
+  - "<click:run_command:'/{command} hide <player>'><hover:show_text:'Нажмите чтобы скрыть игрока'><green>/{command} hide <player></green></hover></click> <gray>- Скрыть игрока с карты</gray>"
+  - "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Нажмите чтобы переключить видимость игрока'><green>/{command} toggle <player></green></hover></click> <gray>- Переключить видимость игрока на карте</gray>"
+  - ""
+  - "<click:run_command:'/{command} reload'><hover:show_text:'Нажмите чтобы перезагрузить конфигурацию'><green>/{command} reload</green></hover></click> <gray>- Перезагрузить конфигурацию плагина</gray>"
+  - ""
+  - "<gray>Используйте <green>/{command} help</green> чтобы увидеть это сообщение помощи</gray>"
 
 # Сообщения статуса
 status:
