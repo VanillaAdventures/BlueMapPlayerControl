@@ -8,7 +8,7 @@ command:
   
   # Command aliases
   aliases:
-    - "bluemap"
+    - "map"
     - "bmp"
     - "mapcontrol"
 
