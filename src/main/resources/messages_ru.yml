@@ -13,6 +13,7 @@ help:
     show_other: "<click:run_command:'/{command} show <player>'><hover:show_text:'Нажмите чтобы показать игрока'><green>/{command} show <player></green></hover></click> <gray>- Сделать игрока видимым на карте</gray>"
     hide_other: "<click:run_command:'/{command} hide <player>'><hover:show_text:'Нажмите чтобы скрыть игрока'><green>/{command} hide <player></green></hover></click> <gray>- Скрыть игрока с карты</gray>"
     toggle_other: "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Нажмите чтобы переключить видимость игрока'><green>/{command} toggle <player></green></hover></click> <gray>- Переключить видимость игрока на карте</gray>"
+    reload: "<click:run_command:'/{command} reload'><hover:show_text:'Нажмите чтобы перезагрузить конфигурацию'><green>/{command} reload</green></hover></click> <gray>- Перезагрузить конфигурацию плагина</gray>"
   footer: "<gray>Используйте <green>/{command} help</green> чтобы увидеть это сообщение помощи</gray>"
 
 # Сообщения статуса
@@ -21,6 +22,7 @@ status:
   invisible: "<red>✗</red> <gray>Теперь вы <red>невидимы</red> на карте</gray>"
   other_visible: "<green>✓</green> <gray>{player} теперь <green>видим</green> на карте</gray>"
   other_invisible: "<red>✗</red> <gray>{player} теперь <red>невидим</red> на карте</gray>"
+  config_reloaded: "<green>✓</green> <gray>Конфигурация перезагружена</gray>"
 
 # Сообщения об ошибках
 errors:

@@ -27,6 +27,4 @@ language:
 settings:
   # Enable debug mode (shows additional logging)
   debug: false
-  
-  # Auto-save configuration changes
-  auto-save: true
+

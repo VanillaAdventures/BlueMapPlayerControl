@@ -27,6 +27,7 @@ public class ConfigManager {
     private String commandName;
     private List<String> commandAliases;
     private boolean minimessageEnabled;
+    private boolean debugEnabled;
     
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -47,6 +48,9 @@ public class ConfigManager {
         commandName = config.getString("command.name", "bmpc");
         commandAliases = config.getStringList("command.aliases");
         minimessageEnabled = config.getBoolean("language.minimessage", true);
+        
+        // Load plugin settings
+        debugEnabled = config.getBoolean("settings.debug", false);
         
         logger.info("Configuration loaded");
     }
@@ -142,6 +146,22 @@ public class ConfigManager {
     public String getMessageFormatted(String path, String... placeholders) {
         Component component = getMessageComponent(path, placeholders);
         return legacySerializer.serialize(component);
+    }
+    
+    public boolean isDebugEnabled() {
+        return debugEnabled;
+    }
+    
+    public void debugLog(String message) {
+        if (debugEnabled) {
+            logger.info("[DEBUG] " + message);
+        }
+    }
+    
+    public void debugLog(String message, Object... args) {
+        if (debugEnabled) {
+            logger.info("[DEBUG] " + String.format(message, args));
+        }
     }
     
     public void reload() {

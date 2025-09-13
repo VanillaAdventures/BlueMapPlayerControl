@@ -29,17 +29,36 @@ public class BMPC implements CommandExecutor, TabCompleter {
 
 	@Override
 	public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+		// Debug logging
+		configManager.debugLog("Command executed by %s with args: %s", sender.getName(), String.join(" ", args));
+		
 		// Check if BlueMap is available
 		if (!BlueMapAPI.getInstance().isPresent()) {
+			configManager.debugLog("BlueMap API not available");
 			sendMessage(sender, "errors.bluemap_not_loaded");
 			return true;
 		}
 		
 		BlueMapAPI api = BlueMapAPI.getInstance().get();
+		configManager.debugLog("BlueMap API loaded successfully");
 		
 		// Handle help command
 		if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase("help"))) {
 			sendHelpMessage(sender);
+			return true;
+		}
+		
+		// Handle reload command
+		if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+			if (!sender.hasPermission("bmpc.reload")) {
+				configManager.debugLog("Sender %s lacks permission bmpc.reload", sender.getName());
+				sendMessage(sender, "errors.no_permission");
+				return true;
+			}
+			
+			configManager.debugLog("Reloading configuration...");
+			configManager.reload();
+			sendMessage(sender, "status.config_reloaded");
 			return true;
 		}
 		
@@ -84,30 +103,48 @@ public class BMPC implements CommandExecutor, TabCompleter {
 		
 		// Handle other player commands
 		if (args.length < 2) {
+			configManager.debugLog("Not enough arguments for other player command");
 			sendMessage(sender, "errors.invalid_usage");
 			return true;
 		}
 		
 		String targetName = args[1];
-		List<Entity> targets = Bukkit.selectEntities(sender, targetName);
+		configManager.debugLog("Looking for target player: %s", targetName);
 		
-		if (targets.isEmpty()) {
+		List<Entity> targets = Bukkit.selectEntities(sender, targetName);
+		configManager.debugLog("Found %d entities matching '%s'", targets.size(), targetName);
+		
+		// Filter to only players
+		List<Player> playerTargets = new ArrayList<>();
+		for (Entity target : targets) {
+			if (target instanceof Player player) {
+				playerTargets.add(player);
+				configManager.debugLog("Added player target: %s (UUID: %s)", player.getName(), player.getUniqueId());
+			}
+		}
+		
+		if (playerTargets.isEmpty()) {
+			configManager.debugLog("No players found matching '%s'", targetName);
 			sendMessage(sender, "errors.player_not_found", "player", targetName);
 			return true;
 		}
 		
-		for (Entity target : targets) {
-			if (!(target instanceof Player targetPlayer)) continue;
+		for (Player targetPlayer : playerTargets) {
+			configManager.debugLog("Processing target player: %s (UUID: %s)", targetPlayer.getName(), targetPlayer.getUniqueId());
 			
 			// Check if trying to target self
 			if (sender instanceof Player && targetPlayer.equals(sender)) {
+				configManager.debugLog("Player %s tried to target themselves, skipping", sender.getName());
 				sendMessage(sender, "errors.cannot_target_self");
 				continue;
 			}
 			
+			configManager.debugLog("Executing command '%s' on player %s", subCommand, targetPlayer.getName());
+			
 			switch (subCommand) {
 				case "toggle":
 					if (!sender.hasPermission("bmpc.others.toggle")) {
+						configManager.debugLog("Sender %s lacks permission bmpc.others.toggle", sender.getName());
 						sendMessage(sender, "errors.no_permission");
 						continue;
 					}
@@ -116,6 +153,7 @@ public class BMPC implements CommandExecutor, TabCompleter {
 					
 				case "show":
 					if (!sender.hasPermission("bmpc.others.show")) {
+						configManager.debugLog("Sender %s lacks permission bmpc.others.show", sender.getName());
 						sendMessage(sender, "errors.no_permission");
 						continue;
 					}
@@ -124,6 +162,7 @@ public class BMPC implements CommandExecutor, TabCompleter {
 					
 				case "hide":
 					if (!sender.hasPermission("bmpc.others.hide")) {
+						configManager.debugLog("Sender %s lacks permission bmpc.others.hide", sender.getName());
 						sendMessage(sender, "errors.no_permission");
 						continue;
 					}
@@ -131,6 +170,7 @@ public class BMPC implements CommandExecutor, TabCompleter {
 					break;
 					
 				default:
+					configManager.debugLog("Unknown subcommand: %s", subCommand);
 					sendMessage(sender, "errors.invalid_usage");
 					break;
 			}
@@ -141,7 +181,10 @@ public class BMPC implements CommandExecutor, TabCompleter {
 
 	private void toggleSelf(BlueMapAPI api, CommandSender sender, UUID senderUUID) {
 		boolean currentVisibility = api.getWebApp().getPlayerVisibility(senderUUID);
+		configManager.debugLog("Player %s current visibility: %s", sender.getName(), currentVisibility);
+		
 		api.getWebApp().setPlayerVisibility(senderUUID, !currentVisibility);
+		configManager.debugLog("Set player %s visibility to: %s", sender.getName(), !currentVisibility);
 		
 		if (!currentVisibility) {
 			sendMessage(sender, "status.visible");
@@ -151,18 +194,23 @@ public class BMPC implements CommandExecutor, TabCompleter {
 	}
 	
 	private void showSelf(BlueMapAPI api, CommandSender sender, UUID senderUUID) {
+		configManager.debugLog("Showing player %s on map", sender.getName());
 		api.getWebApp().setPlayerVisibility(senderUUID, true);
 		sendMessage(sender, "status.visible");
 	}
 
 	private void hideSelf(BlueMapAPI api, CommandSender sender, UUID senderUUID) {
+		configManager.debugLog("Hiding player %s from map", sender.getName());
 		api.getWebApp().setPlayerVisibility(senderUUID, false);
 		sendMessage(sender, "status.invisible");
 	}
 	
 	private void toggleOther(BlueMapAPI api, CommandSender sender, Player targetPlayer) {
 		boolean currentVisibility = api.getWebApp().getPlayerVisibility(targetPlayer.getUniqueId());
+		configManager.debugLog("Player %s current visibility: %s", targetPlayer.getName(), currentVisibility);
+		
 		api.getWebApp().setPlayerVisibility(targetPlayer.getUniqueId(), !currentVisibility);
+		configManager.debugLog("Set player %s visibility to: %s", targetPlayer.getName(), !currentVisibility);
 		
 		if (!currentVisibility) {
 			sendMessage(sender, "status.other_visible", "player", targetPlayer.getDisplayName());
@@ -172,11 +220,13 @@ public class BMPC implements CommandExecutor, TabCompleter {
 	}
 
 	private void showOther(BlueMapAPI api, CommandSender sender, Player targetPlayer) {
+		configManager.debugLog("Showing player %s on map", targetPlayer.getName());
 		api.getWebApp().setPlayerVisibility(targetPlayer.getUniqueId(), true);
 		sendMessage(sender, "status.other_visible", "player", targetPlayer.getDisplayName());
 	}
 
 	private void hideOther(BlueMapAPI api, CommandSender sender, Player targetPlayer) {
+		configManager.debugLog("Hiding player %s from map", targetPlayer.getName());
 		api.getWebApp().setPlayerVisibility(targetPlayer.getUniqueId(), false);
 		sendMessage(sender, "status.other_invisible", "player", targetPlayer.getDisplayName());
 	}
@@ -191,6 +241,11 @@ public class BMPC implements CommandExecutor, TabCompleter {
 			completions.add("toggle");
 			completions.add("show");
 			completions.add("hide");
+			
+			// Add reload command if player has permission
+			if (sender.hasPermission("bmpc.reload")) {
+				completions.add("reload");
+			}
 			
 			// Add player names if they have permission for others
 			if (sender.hasPermission("bmpc.others")) {
@@ -280,6 +335,15 @@ public class BMPC implements CommandExecutor, TabCompleter {
 					"command", commandName);
 				sender.sendMessage(hideOtherCmd);
 			}
+		}
+		
+		// Admin commands
+		if (sender.hasPermission("bmpc.reload")) {
+			sender.sendMessage("");
+			
+			String reloadCmd = configManager.getMessageFormatted("help.commands.reload",
+				"command", commandName);
+			sender.sendMessage(reloadCmd);
 		}
 		
 		// Send footer

@@ -13,6 +13,7 @@ help:
     show_other: "<click:run_command:'/{command} show <player>'><hover:show_text:'Click to show a player'><green>/{command} show <player></green></hover></click> <gray>- Make a player visible on the map</gray>"
     hide_other: "<click:run_command:'/{command} hide <player>'><hover:show_text:'Click to hide a player'><green>/{command} hide <player></green></hover></click> <gray>- Hide a player from the map</gray>"
     toggle_other: "<click:run_command:'/{command} toggle <player>'><hover:show_text:'Click to toggle player visibility'><green>/{command} toggle <player></green></hover></click> <gray>- Toggle a player's visibility on the map</gray>"
+    reload: "<click:run_command:'/{command} reload'><hover:show_text:'Click to reload configuration'><green>/{command} reload</green></hover></click> <gray>- Reload plugin configuration</gray>"
   footer: "<gray>Use <green>/{command} help</green> to see this help message</gray>"
 
 # Status messages
@@ -21,6 +22,7 @@ status:
   invisible: "<red>✗</red> <gray>You are now <red>invisible</red> on the map</gray>"
   other_visible: "<green>✓</green> <gray>{player} is now <green>visible</green> on the map</gray>"
   other_invisible: "<red>✗</red> <gray>{player} is now <red>invisible</red> on the map</gray>"
+  config_reloaded: "<green>✓</green> <gray>Configuration reloaded</gray>"
 
 # Error messages
 errors:
